@@ -1,15 +1,19 @@
-BoilerFlask
+BoilerFlask + ffmpeg
 ============
 
-A simple boilerplate Flask application. This base reduces the amount of code I need to write from scratch. 
+A simple boilerplate Flask application with support for ffmpeg and numpy.
+This example uses the (somewhat old) python-ffmpeg-buildpack. Future support should use .vendor_urls and multibuildpack to reference the most up to date heroku-python-buildpack.
 
 Instructions
 ------------
+To deploy this application after cloned, simply:
 
-First, you'll need to clone the repo.
+	$ heroku create --buildpack git://github.com/integricho/heroku-buildpack-python-ffmpeg.git
+	$ heroku config:add BUILDPACK_URL=git://github.com/integricho/heroku-buildpack-python-ffmpeg.git
 
+You may also want to use `gunicorn` with `gevent`, in which case simply edit the `Procfile` and `requirements.txt` to add the dependencies and declare the web process.
 
-Second, download `pip` and `virtualenv`
+To use it locally, you must download `pip` and `virtualenv`
 
     $ sudo easy_install pip
     $ sudo pip install virtualenv
@@ -41,7 +45,3 @@ Now, you can run the application locally.
 You can also run it using the production server if you install `libevent-dev` and `foreman`, but I am leaving that for another day, it also is difficult in Windows
 
     $ foreman start
-
-
-heroku create --buildpack https://github.com/ddollar/heroku-buildpack-multi.git
-heroku config:add BUILDPACK_URL=https://github.com/ddollar/heroku-buildpack-multi.git
